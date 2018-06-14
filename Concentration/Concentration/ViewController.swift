@@ -11,6 +11,20 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    let emojiTheme = [
+        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
+        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
+        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
+        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
+        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
+        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
+    ]
+    lazy var emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
+    var emoji = [Int: String]()
+    
+    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet weak var scoreLabel: UILabel!
 
     // swift is strongly type language -> everything has to have type, altought it can guess type
     var flipCount = 0 {
@@ -18,10 +32,6 @@ class ViewController: UIViewController {
             flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
-    
-    @IBOutlet weak var flipCountLabel: UILabel!
-    
-    @IBOutlet var cardButtons: [UIButton]!
     
     // very important to learn use Optionals (?,!) or use if ---> checking for nil value
     @IBAction func touchCard(_ sender: UIButton) {
@@ -36,15 +46,8 @@ class ViewController: UIViewController {
     
     @IBAction func beginNewGame(_ sender: UIButton) {
         flipCount = 0
-        emojiTheme = [
-            ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
-            ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
-            ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
-            ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
-            ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
-            ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
-        ]
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        updateTheme()
         updateViewFromModel()
     }
     
@@ -64,23 +67,15 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiTheme = [
-        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
-        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
-        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
-        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
-        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
-        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
-    ]
-
-    
-    var emoji = [Int: String]()
+    func updateTheme() {
+        emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
+    }
     
     func emoji(for card: Card) -> String {
         //can separate if by , in between
-        if emoji[card.indentifier] == nil, emojiTheme[1].count > 0 {
-                let randomIndex = Int(arc4random_uniform(UInt32(emojiTheme[1].count)))
-                emoji[card.indentifier] = emojiTheme[1].remove(at: randomIndex)
+        if emoji[card.indentifier] == nil, emojiChoices.count > 0 {
+                let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
+                emoji[card.indentifier] = emojiChoices.remove(at: randomIndex)
         }
         return emoji[card.indentifier] ?? "?"
     }
