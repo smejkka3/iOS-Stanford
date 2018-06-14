@@ -34,6 +34,14 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func beginNewGame(_ sender: UIButton) {
+        flipCount = 0
+        emojiChoices = ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"]
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        updateViewFromModel()
+    }
+    
+    
     func updateViewFromModel() {
         //indicies countable range in array
         for index in cardButtons.indices {
@@ -48,7 +56,9 @@ class ViewController: UIViewController {
             }
         }
     }
-    var emojiChoices = ["🦇","😱","🙀","😈","🎃","👻","🍭","🍬","🍎"]
+    
+    var emojiChoices = ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"]
+
     
     var emoji = [Int: String]()
     
