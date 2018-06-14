@@ -36,7 +36,14 @@ class ViewController: UIViewController {
     
     @IBAction func beginNewGame(_ sender: UIButton) {
         flipCount = 0
-        emojiChoices = ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"]
+        emojiTheme = [
+            ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
+            ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
+            ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
+            ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
+            ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
+            ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
+        ]
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         updateViewFromModel()
     }
@@ -57,16 +64,23 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"]
+    var emojiTheme = [
+        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
+        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
+        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
+        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
+        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
+        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
+    ]
 
     
     var emoji = [Int: String]()
     
     func emoji(for card: Card) -> String {
         //can separate if by , in between
-        if emoji[card.indentifier] == nil, emojiChoices.count > 0 {
-                let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-                emoji[card.indentifier] = emojiChoices.remove(at: randomIndex)
+        if emoji[card.indentifier] == nil, emojiTheme[1].count > 0 {
+                let randomIndex = Int(arc4random_uniform(UInt32(emojiTheme[1].count)))
+                emoji[card.indentifier] = emojiTheme[1].remove(at: randomIndex)
         }
         return emoji[card.indentifier] ?? "?"
     }
