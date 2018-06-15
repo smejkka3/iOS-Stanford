@@ -10,15 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
-    // computed propety - read only
+    //number of pairs in game ---> private
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    // computed propety - read only, I dont mind someone ask for number of paris, but not let them set it
     var numberOfPairsOfCards: Int {
         get {
             return (cardButtons.count + 1 / 2)
         }
     }
     
-    let emojiTheme = [
+    private let emojiTheme = [
         ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
         ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
         ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
@@ -26,15 +27,15 @@ class ViewController: UIViewController {
         ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
         ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
     ]
-    lazy var emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
-    var emoji = [Int: String]()
+    private lazy var emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
+    private var emoji = [Int: String]()
     
-    @IBOutlet weak var flipCountLabel: UILabel!
-    @IBOutlet var cardButtons: [UIButton]!
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel!
+    @IBOutlet private var cardButtons: [UIButton]!
+    @IBOutlet private weak var scoreLabel: UILabel!
     
     // very important to learn use Optionals (?,!) or use if ---> checking for nil value
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -43,14 +44,14 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func beginNewGame(_ sender: UIButton) {
+    @IBAction private func beginNewGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         updateTheme()
         updateViewFromModel()
     }
     
     
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         //indicies countable range in array
         for index in cardButtons.indices {
             let button = cardButtons[index]
@@ -67,11 +68,11 @@ class ViewController: UIViewController {
         scoreLabel.text = "Score: \(game.scoreCount)"
     }
     
-    func updateTheme() {
+    private func updateTheme() {
         emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
     }
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         //can separate if by , in between
         if emoji[card.indentifier] == nil, emojiChoices.count > 0 {
                 let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
