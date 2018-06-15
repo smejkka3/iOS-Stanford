@@ -11,7 +11,29 @@ import Foundation
 class Concentration {
     var cards = [Card]()
     
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        // using computer property
+        get {
+            var foundIndex: Int?
+            for index in cards.indices {
+                if cards [index].isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        // default name of local is newValue
+        set {
+            for index in cards.indices {
+                // true if index of oneAndOnlyFaceUp equals newValue
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     var scoreCount = 0
     // swift is strongly type language -> everything has to have type, altought it can guess type
     var flipCount = 0
@@ -30,15 +52,16 @@ class Concentration {
                     }
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
+                // indexOfOneAndOnlyFaceUpCard = nil ---> already done in computer property
 
                 cards[index].seenBefore = true
             } else {
                 //either no or 2 cards are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
+//                for flipDownIndex in cards.indices {
+//                    cards[flipDownIndex].isFaceUp = false
+//                }
+//                cards[index].isFaceUp = true
+//                ----- > all of this also done in computer property
                 indexOfOneAndOnlyFaceUpCard = index
             }
             flipCount += 1
