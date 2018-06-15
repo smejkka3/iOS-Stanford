@@ -25,17 +25,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
-
-    // swift is strongly type language -> everything has to have type, altought it can guess type
-    var flipCount = 0 {
-        didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
     
     // very important to learn use Optionals (?,!) or use if ---> checking for nil value
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -45,7 +37,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func beginNewGame(_ sender: UIButton) {
-        flipCount = 0
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
         updateTheme()
         updateViewFromModel()
@@ -65,6 +56,7 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
         }
+        flipCountLabel.text = "Flips: \(game.flipCount)"
         scoreLabel.text = "Score: \(game.scoreCount)"
     }
     

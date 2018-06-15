@@ -13,6 +13,8 @@ class Concentration {
     
     var indexOfOneAndOnlyFaceUpCard: Int?
     var scoreCount = 0
+    // swift is strongly type language -> everything has to have type, altought it can guess type
+    var flipCount = 0
     
     func chooseCard(at index: Int){
         if !cards[index].isMatched {
@@ -22,9 +24,15 @@ class Concentration {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                     scoreCount += 2
+                } else {
+                    if cards[index].seenBefore == true {
+                        scoreCount -= 1
+                    }
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
+
+                cards[index].seenBefore = true
             } else {
                 //either no or 2 cards are face up
                 for flipDownIndex in cards.indices {
@@ -33,6 +41,7 @@ class Concentration {
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
+            flipCount += 1
         }
     }
     
