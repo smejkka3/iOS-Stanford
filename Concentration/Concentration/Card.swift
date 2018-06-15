@@ -12,6 +12,7 @@ import Foundation
 struct Card {
     var isFaceUp = false
     var isMatched = false
+    var seenBefore = false
     var indentifier: Int
     
     static var identifierFactory = 0
