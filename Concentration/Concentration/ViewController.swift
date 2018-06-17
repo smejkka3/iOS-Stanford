@@ -14,18 +14,24 @@ class ViewController: UIViewController {
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     // computed propety - read only, I dont mind someone ask for number of paris, but not let them set it
     var numberOfPairsOfCards: Int {
-        get {
-            return (cardButtons.count + 1 / 2)
-        }
+            return ((cardButtons.count + 1) / 2)
     }
     
+//    private let emojiTheme = [
+//        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
+//        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
+//        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
+//        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
+//        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
+//        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
+//    ]
     private let emojiTheme = [
-        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
-        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
-        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
-        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
-        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
-        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
+        "🦇🐶🐨🐊🐳🦖🐼🐜🦈🐯", //animals
+        "🍭🍪🍩🍿🍫🍬🍮🍰🍦🌰", //sweets
+        "⚽️🏀🏈⚾️🎾🏐🏉🎱🏓🏒", //sports
+        "🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐", //vehicles
+        "📱💻🖥📷📀🕹🖱⌚️🎥📞", //tech
+        "🇨🇿🇦🇺🇩🇪🇧🇷🇺🇸🇪🇸🇨🇭🇫🇷🇬🇧🇲🇽" //countries
     ]
     private lazy var emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
     private var emoji = [Card: String]()
@@ -45,7 +51,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func beginNewGame(_ sender: UIButton) {
-        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         updateTheme()
         updateViewFromModel()
     }
@@ -75,7 +81,8 @@ class ViewController: UIViewController {
     private func emoji(for card: Card) -> String {
         //can separate if by , in between
         if emoji[card] == nil, emojiChoices.count > 0 {
-                emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+            let randomIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
+            emoji[card] = String(emojiChoices.remove(at: randomIndex))
         }
         return emoji[card] ?? "?"
     }
