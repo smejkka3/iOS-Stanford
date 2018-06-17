@@ -8,9 +8,11 @@
 
 import Foundation
 
-class Concentration {
+// copiing only when when its changing
+struct Concentration {
     private(set) var cards = [Card]()
     
+    // for var with set swift already know that it is mutating
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         // using computer property
         get {
@@ -38,7 +40,8 @@ class Concentration {
     // swift is strongly type language -> everything has to have type, altought it can guess type
     var flipCount = 0
     
-    func chooseCard(at index: Int){
+    // function is not marked mutable so it is assumed that it is not mutable
+    mutating func chooseCard(at index: Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): Chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
