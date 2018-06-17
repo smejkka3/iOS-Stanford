@@ -9,11 +9,17 @@
 import Foundation
 
 //struct makes copy of the object, class passes reference
-struct Card {
+struct Card : Hashable {
+    var hashValue: Int {return indentifier }
+    
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.indentifier == rhs.indentifier
+    }
+    
     var isFaceUp = false
     var isMatched = false
     var seenBefore = false
-    var indentifier: Int
+    private var indentifier: Int
     
     private static var identifierFactory = 0
     

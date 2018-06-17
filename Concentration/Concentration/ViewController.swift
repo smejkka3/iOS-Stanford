@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
     ]
     private lazy var emojiChoices = emojiTheme[Int(arc4random_uniform(UInt32(emojiTheme.count)))]
-    private var emoji = [Int: String]()
+    private var emoji = [Card: String]()
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     @IBOutlet private var cardButtons: [UIButton]!
@@ -74,10 +74,10 @@ class ViewController: UIViewController {
     
     private func emoji(for card: Card) -> String {
         //can separate if by , in between
-        if emoji[card.indentifier] == nil, emojiChoices.count > 0 {
-                emoji[card.indentifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+        if emoji[card] == nil, emojiChoices.count > 0 {
+                emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
-        return emoji[card.indentifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 }
 
