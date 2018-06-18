@@ -14,17 +14,17 @@ class ViewController: UIViewController {
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     // computed propety - read only, I dont mind someone ask for number of paris, but not let them set it
     var numberOfPairsOfCards: Int {
-            return ((cardButtons.count + 1) / 2)
+        return ((cardButtons.count + 1) / 2)
     }
     
-//    private let emojiTheme = [
-//        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
-//        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
-//        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
-//        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
-//        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
-//        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
-//    ]
+    //    private let emojiTheme = [
+    //        ["🦇","🐶","🐨","🐊","🐳","🦖","🐼","🐜","🦈","🐯"], //animals
+    //        ["🍭","🍪","🍩","🍿","🍫","🍬","🍮","🍰","🍦","🌰"], //sweets
+    //        ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏒"], //sports
+    //        ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐"], //vehicles
+    //        ["📱","💻","🖥","📷","📀","🕹","🖱","⌚️","🎥","📞"], //tech
+    //        ["🇨🇿","🇦🇺","🇩🇪","🇧🇷","🇺🇸","🇪🇸","🇨🇭","🇫🇷","🇬🇧","🇲🇽"] //countries
+    //    ]
     private let emojiTheme = [
         "🦇🐶🐨🐊🐳🦖🐼🐜🦈🐯", //animals
         "🍭🍪🍩🍿🍫🍬🍮🍰🍦🌰", //sweets
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     @IBOutlet private var cardButtons: [UIButton]!
-    @IBOutlet private weak var scoreLabel: UILabel!
+    @IBOutlet private weak var scoreCountLabel: UILabel!
     
     // very important to learn use Optionals (?,!) or use if ---> checking for nil value
     @IBAction private func touchCard(_ sender: UIButton) {
@@ -50,12 +50,33 @@ class ViewController: UIViewController {
         }
     }
     
+    private func updateFlipCountLabel(){
+        let attributes: [NSAttributedStringKey: Any] = [
+            .strokeWidth: 5.0,
+            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)",
+            attributes: attributes)
+        
+        flipCountLabel.attributedText = attributedString
+    }
+    
+    private func updateScoreCountLabel(){
+        let attributes: [NSAttributedStringKey: Any] = [
+            .strokeWidth: 5.0,
+            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Score: \(game.scoreCount)",
+            attributes: attributes)
+        
+        scoreCountLabel.attributedText = attributedString
+    }
+    
     @IBAction private func beginNewGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         updateTheme()
         updateViewFromModel()
     }
-    
     
     private func updateViewFromModel() {
         //indicies countable range in array
@@ -70,8 +91,8 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
         }
-        flipCountLabel.text = "Flips: \(game.flipCount)"
-        scoreLabel.text = "Score: \(game.scoreCount)"
+        updateFlipCountLabel()
+        updateScoreCountLabel()
     }
     
     private func updateTheme() {

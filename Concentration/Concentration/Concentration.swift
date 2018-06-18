@@ -38,25 +38,11 @@ struct Concentration {
             }
         }
     }
-    var scoreCount = 0
+    private(set) var scoreCount = 0
     // swift is strongly type language -> everything has to have type, altought it can guess type
     private(set) var flipCount = 0
-//  {
-//        didSet {
-//            updateFlipCountLabel()
-//        }
-//    }
-//
-//    private func updateFlipCountLabel() {
-//        let attributes: [NSAttributedStringKey: Any] = [
-//            .strokeWidth: 5.0,
-//            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
-//        ]
-//        let attributedString = NSAttributedString(string: "Flips: \(flipCount)",
-//            attributes: attributes)
-//
-//        flipCountLabel.attributedText = attributedString
-//    }
+
+
     
     // function is not marked mutable so it is assumed that it is not mutable
     mutating func chooseCard(at index: Int){
