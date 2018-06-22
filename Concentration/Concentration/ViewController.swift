@@ -37,8 +37,17 @@ class ViewController: UIViewController {
     private var emoji = [Card: String]()
     
     @IBOutlet private weak var flipCountLabel: UILabel!
+    {
+        didSet{
+            updateFlipCountLabel()
+        }
+    }
     @IBOutlet private var cardButtons: [UIButton]!
-    @IBOutlet private weak var scoreCountLabel: UILabel!
+    @IBOutlet private weak var scoreCountLabel: UILabel!{
+        didSet{
+            updateScoreCountLabel()
+        }
+    }
     
     // very important to learn use Optionals (?,!) or use if ---> checking for nil value
     @IBAction private func touchCard(_ sender: UIButton) {
