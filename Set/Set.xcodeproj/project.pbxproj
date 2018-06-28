@@ -14,6 +14,8 @@
 		361A716120E3D66100A746FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 361A715F20E3D66100A746FB /* LaunchScreen.storyboard */; };
 		361A716C20E3D66200A746FB /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361A716B20E3D66200A746FB /* SetTests.swift */; };
 		361A717720E3D66200A746FB /* SetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361A717620E3D66200A746FB /* SetUITests.swift */; };
+		36A0BEC120E55E7D000B80CD /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BEC020E55E7D000B80CD /* Set.swift */; };
+		36A0BEC320E55EB4000B80CD /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0BEC220E55EB4000B80CD /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		361A717220E3D66200A746FB /* SetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		361A717620E3D66200A746FB /* SetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUITests.swift; sourceTree = "<group>"; };
 		361A717820E3D66200A746FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36A0BEC020E55E7D000B80CD /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		36A0BEC220E55EB4000B80CD /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				361A715F20E3D66100A746FB /* LaunchScreen.storyboard */,
 				361A715A20E3D66100A746FB /* Main.storyboard */,
 				361A716220E3D66200A746FB /* Info.plist */,
+				36A0BEC020E55E7D000B80CD /* Set.swift */,
+				36A0BEC220E55EB4000B80CD /* Card.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -269,6 +275,8 @@
 			files = (
 				361A715920E3D66100A746FB /* ViewController.swift in Sources */,
 				361A715720E3D66100A746FB /* AppDelegate.swift in Sources */,
+				36A0BEC120E55E7D000B80CD /* Set.swift in Sources */,
+				36A0BEC320E55EB4000B80CD /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
